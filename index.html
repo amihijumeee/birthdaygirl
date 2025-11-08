@@ -388,10 +388,11 @@
     let typingTimer = null;
     function typeText(el, text, speed = 40) {
       if (typingTimer) clearInterval(typingTimer); // clear previous
-      el.textContent = '';
+      el.innerHTML = ''; // use innerHTML instead of textContent
       let i = 0;
       typingTimer = setInterval(() => {
-        el.textContent += text.charAt(i);
+        // append one character at a time
+        el.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
         i++;
         if (i >= text.length) {
           clearInterval(typingTimer);
@@ -414,7 +415,13 @@
       setTimeout(() => heartIcon.classList.remove('pulse'), 800);
 
       // reset + type message
-      const love = "Happy Birthday My Cukcam. Semoga Awak dimurahkan rezeki sentiasa, menjadi anak yang solehah kepada Umi dan Bapak, semoga awak sentiasa dipermudahkan segala urusan dan berjaya dunia akhirat dan semoga hari ini menjadi hari yang paling indah dalam hidup awak. I will always be there and love you no matter what happen, MNS.";
+      const love = `Happy Birthday My Cukcam 💗.
+
+      Semoga awak sentiasa dimurahkan rezeki, diberi kesihatan yang baik, menjadi anak yang solehah kepada Umi dan Bapak, dan semoga setiap langkah awak dipermudahkan oleh Allah SWT. Saya doakan agar awak terus berjaya dalam apa sahaja yang awak impikan di dunia dan akhirat. 
+      
+      Today is special day for the one that I love the most. Semoga hari awak hari ini dipenuhi dengan senyuman, ketenangan, dan kenangan indah yang akan awak ingat selamanya. Terima kasih sebab sentiasa ada untuk saya dan saya akan hargainya setiap masa.
+      
+      Saya bersyukur sangat sebab dapat kenal dan ada awak dalam hidup saya. Whatever happen, saya janji akan sentiasa ada untuk awak, akan terus sayang awak, dan takkan berhenti doakan yang terbaik untuk awak. I will always be there and love you no matter what happens. - MNS `;
       typeText(note, love, 30);
 
       // small floating hearts effect (limit how many appear)
